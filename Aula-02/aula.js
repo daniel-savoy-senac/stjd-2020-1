@@ -36,6 +36,7 @@ async function main(){
 
     // 3 - Carregar os arquivos de shader (.glsl)
     vertexShaderSource = await fetch("vertex.glsl").then(r => r.text());
+    fragmentShaderSource = await fetch("fragment.glsl").then(r => r.text());
 
     // 4 - Compilar os shaders
 
