@@ -21,14 +21,21 @@ function createCanvas(){
     document.body.appendChild(canvas);
 }
 
+function loadGL(){
+    gl = canvas.getContext("webgl");
+    gl.viewport(0,0,canvas.width, canvas.height);
+}
+
 async function main(){
 
     // 1 - Carregar a área de desenho (canvas)
     createCanvas();
 
     // 2 - Carregar a API do WebGL (contexto)
+    loadGL();
 
     // 3 - Carregar os arquivos de shader (.glsl)
+    vertexShaderSource = await fetch("vertex.glsl").then(r => r.text());
 
     // 4 - Compilar os shaders
 
