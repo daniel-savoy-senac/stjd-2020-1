@@ -13,13 +13,18 @@ let canvas,
     frame;
 
 
-function getCanvas(){
-
+function createCanvas(){
+    canvas = document.createElement("canvas");
+    canvas.setAttribute("width", 800);
+    canvas.setAttribute("height", 600);
+    canvas.style.backgroundColor = "#ccc";
+    document.body.appendChild(canvas);
 }
 
 async function main(){
 
     // 1 - Carregar a área de desenho (canvas)
+    createCanvas();
 
     // 2 - Carregar a API do WebGL (contexto)
 
