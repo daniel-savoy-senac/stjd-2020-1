@@ -10,6 +10,7 @@ let canvas,
     data,
     positionAttr,
     positionBuffer,
+    frameUniform,
     frame = 0;
 
 
@@ -91,11 +92,15 @@ async function main(){
     gl.enableVertexAttribArray(positionAttr);
     gl.vertexAttribPointer(positionAttr, 2, gl.FLOAT, false, 0, 0);
 
+    // 7.5 - Localizar Uniform
+    frameUniform = gl.getUniformLocation(shaderProgram, "frame");
+
     // 8 - Chamar o loop de redesenho
     render();
 }
 
 function render(){
+    gl.uniform1f(frameUniform, frame);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     //POINTS, LINES, LINE_STRIP, TRIANGLES
     gl.drawArrays(gl.TRIANGLES, 0, data.points.length/2);
