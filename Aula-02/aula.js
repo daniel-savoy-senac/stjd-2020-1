@@ -10,7 +10,7 @@ let canvas,
     data,
     positionAttr,
     positionBuffer,
-    frame;
+    frame = 0;
 
 
 function createCanvas(){
@@ -54,7 +54,7 @@ function link(vertexShader, fragmentShader){
 }
 
 function getData(){
-    let points = [0.0, 0.0, 0.8, 0.8, -0.8, 0.8];
+    let points = [1.0, -1.0, 0.8, 0.8, -0.8, 0.8];
     let array = new Float32Array(points);
     let modelo = {"points": array};
     return modelo;
@@ -92,10 +92,14 @@ async function main(){
     gl.vertexAttribPointer(positionAttr, 2, gl.FLOAT, false, 0, 0);
 
     // 8 - Chamar o loop de redesenho
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    render();
+}
 
+function render(){
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     //POINTS, LINES, LINE_STRIP, TRIANGLES
     gl.drawArrays(gl.TRIANGLES, 0, data.points.length/2);
-
+    frame++;
+    requestAnimationFrame(render);
 }
 
