@@ -1,0 +1,3 @@
+
+Comandos do GLSL
+http://www.shaderific.com/glsl-functions
