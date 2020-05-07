@@ -25,6 +25,7 @@ function createCanvas(){
 function loadGL(){
     gl = canvas.getContext("webgl");
     gl.viewport(0,0,canvas.width, canvas.height);
+    //gl.enable(gl.DEPTH_TEST);
 }
 
 
