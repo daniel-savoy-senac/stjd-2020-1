@@ -15,6 +15,7 @@ let canvas,
     viewUniform,
     projectionUniform,
     model,
+    model2,
     view,
     projection,
     frame = 0;
@@ -133,6 +134,7 @@ async function main(){
     projectionUniform =  gl.getUniformLocation(shaderProgram, "projection");
 
     model = mat4.identity([]);
+    model2 = mat4.fromTranslation([],[2,0,0]);
 
     view = mat4.lookAt([],
         [-3, 1, 3], //posicao do observador
@@ -160,6 +162,12 @@ function render(){
     gl.uniform1f(frameUniform, frame);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     //POINTS, LINES, LINE_STRIP, TRIANGLES
+    // MODIFICAR MODEL 1 COM ROTAÇÃO
+    gl.uniformMatrix4fv(modelUniform, gl.FALSE, new Float32Array(model));
+    gl.drawArrays(gl.TRIANGLES, 0, data.points.length/3);
+    // MODIFICAR MODEL 2 COM ROTAÇÃO
+    model2 = mat4.fromTranslation([],[frame/120,0,0]);
+    gl.uniformMatrix4fv(modelUniform, gl.FALSE, new Float32Array(model2));
     gl.drawArrays(gl.TRIANGLES, 0, data.points.length/3);
     frame++;
     requestAnimationFrame(render);

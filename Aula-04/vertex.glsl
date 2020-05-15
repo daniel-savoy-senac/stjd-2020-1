@@ -8,11 +8,13 @@ uniform mat4 projection;
 
 attribute vec3 position;
 
-varying vec4 color;
+varying vec4 frag_pos;
 
-void main() {   
-    gl_Position = projection * view * model * vec4(position, 1.0);
+void main() { 
+    vec4 vertex_pos = model * vec4(position, 1.0);
+    
+    gl_Position = projection * view * vertex_pos;
 
-    color = vec4(position, 1.0);
+    frag_pos = vertex_pos;
 
 }
