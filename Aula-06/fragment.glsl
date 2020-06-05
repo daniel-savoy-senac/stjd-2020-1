@@ -24,16 +24,20 @@ void main() {
     // normal
     vec4 N = normalize(frag_normal);
 
-
+    // ILUMINAÇÃO PHONG (especular + difusa + ambiente)
+    // Specular = diferença entre N (normal) e H (metade do ângulo entre a direção da câmera e da luz) elevado pelo brilho
     float specular = pow(max(0.0, dot(N, H)), shininess);
-    float diffuse = max(0.0, dot(L, N)); 
+    // Difusa = diferença entre N (normal) e L (direção da luz)
+    float diffuse = max(0.0, dot(L, N));
+    // Ambiente = cor das áreas mais escuras 
     float ambient = 0.3;
 
+    // Multiplicando cada componente por uma cor
     vec4 S = specular * vec4(1.0, 1.0, 1.0, 1.0);
     vec4 D = diffuse * vec4(1.0, 0.8, 0.0 , 1.0);
     vec4 A = ambient * vec4(0.0, 0.0, 0.8, 1.0);
     
-    vec3 color = S.rgb + D.rgb + A.rgb;
+    vec4 color = S + D + A;
     
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(color.rgb, 1.0);
 }
